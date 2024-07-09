@@ -35,7 +35,7 @@ const MyBlogs = () => {
   return (
     <div>
       <Navbar />
-      <div className="px-5 pt-4 bg-[#edece3] md:px-[100px] min-h-[80vh] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="px-10 pt-4 bg-[#edece3] md:px-[100px] min-h-[80vh] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {loader ? (
           <div className="h-[40vh] flex justify-center items-center">
             <Loader />

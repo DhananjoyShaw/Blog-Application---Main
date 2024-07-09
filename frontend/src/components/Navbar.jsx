@@ -18,7 +18,7 @@ const Navbar = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="flex flex-col md:flex-row bg-[#57A6A1] items-center justify-between px-6 md:px-[200px] py-4 space-y-4 md:space-y-0">
+    <div className="flex flex-col md:flex-row bg-[#57A6A1] items-center justify-between px-6 md:px-[100px] py-4 space-y-4 md:space-y-0">
       <h1 className="text-2xl font-mono md:text-3xl font-extrabold">
         <Link to="/">BLOGIFY</Link>
       </h1>

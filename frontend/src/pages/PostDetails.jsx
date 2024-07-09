@@ -81,7 +81,7 @@ const PostDetails = () => {
   return (
     <div>
       <Navbar />
-      {loader ? <div className="h-[80vh] flex justify-center items-center w-full"><Loader /></div> : <div className="px-8 md:px-[200px] mt-8">
+      {loader ? <div className="h-[80vh] flex justify-center items-center w-full"><Loader /></div> : <div className="px-8 md:px-[140px] mt-8">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-black md:text-3xl">{post.title}</h1>
           {user?._id === post?.userId && <div className="flex items-center justify-center space-x-2">
@@ -89,14 +89,14 @@ const PostDetails = () => {
             <p className="cursor-pointer" onClick={handleDeletePost}><MdDelete /></p>
           </div>}
         </div>
-        <div className="flex items-center justify-between mt-2 md:mt-4">
+        <div className="flex items-center text-gray-900 font-semibold justify-between mt-2 md:mt-4">
           <p>@{post.username}</p>
           <div className="flex space-x-2">
             <p>{new Date(post.updatedAt).toString().slice(0, 15)}</p>
             <p>{new Date(post.updatedAt).toString().slice(16, 24)}</p>
           </div>
         </div>
-        <img src={IF + post.photo} className="w-full  mx-auto mt-8" alt="" />
+        <img src={IF + post.photo} className="w-[58%] mx-auto mt-8 object-scale-down rounded-md" alt="" />
         <div
           className="text-lg mx-auto mt-8"
           dangerouslySetInnerHTML={{ __html: post.desc }}
@@ -105,7 +105,7 @@ const PostDetails = () => {
           <p>Categories:</p>
           <div className="flex justify-center items-center space-x-2">
             {post.categories?.map((c, i) => (
-              <><div key={i} className="bg-gray-300 rounded-lg px-3 py-1">{c}</div></>
+              <><div key={i} className="bg-[#95B1AE] rounded-lg px-3 py-1">{c}</div></>
             ))}
           </div>
         </div>
@@ -115,8 +115,8 @@ const PostDetails = () => {
         </div>
         {/* write a comment */}
         <div className="w-full flex flex-col mt-4 md:flex-row">
-          <input onChange={(e) => setComment(e.target.value)} type="text" placeholder="Write a comment" className="md:w-[80%] outline-none py-2 px-4 mt-4 md:mt-0" />
-          <button onClick={postComment} className="bg-black text-sm text-white px-2 py-2 md:w-[20%] mt-4 md:mt-0">Add Comment</button>
+          <input onChange={(e) => setComment(e.target.value)} type="text" placeholder="Write a comment ..." className="bg-[#95B1AE] placeholder-black md:w-[80%] outline-none py-2 px-4 mt-4 md:mt-0" />
+          <button onClick={postComment} className="bg-[#344C64] hover:bg-[#240750] text-sm text-white  rounded-sm px-2 py-2 md:w-[20%] mt-4 md:mt-0">Add Comment</button>
         </div>
       </div>}
       <Footer />

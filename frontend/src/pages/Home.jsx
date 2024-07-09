@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div className="px-5 pt-4 bg-[#edece6] md:px-[100px] min-h-[80vh]">
+      <div className="px-10 pt-4 bg-[#edece6] md:px-[100px] min-h-[80vh]">
         {loader ? (
           <div className="h-[40vh] flex justify-center items-center">
             <Loader />
