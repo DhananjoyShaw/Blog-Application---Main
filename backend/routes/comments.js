@@ -1,7 +1,4 @@
 import express from 'express';
-import User from '../models/User.js';
-import bcrypt from 'bcrypt';
-import Post from '../models/Post.js';
 import Comment from '../models/Comment.js';
 import verifyToken from '../middlewares/verifyToken.js';
 
