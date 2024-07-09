@@ -6,7 +6,6 @@ import { useContext } from "react"
 import { UserContext } from "../context/UserContext"
 
 const Comment = ({ c, post }) => {
-
   const { user } = useContext(UserContext)
   const deleteComment = async (id) => {
     try {
@@ -32,9 +31,8 @@ const Comment = ({ c, post }) => {
         </div>
       </div>
       <p className="px-4 mt-2">{c.comment}</p>
-
     </div>
   )
 }
 
-export default Comment
+export default Comment;

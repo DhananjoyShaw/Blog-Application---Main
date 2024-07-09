@@ -51,9 +51,7 @@ const MyBlogs = () => {
         {loader ? <div className="h-[40vh] flex justify-center items-center"><Loader /></div> : !noResults ?
           posts.map((post) => (
             <>
-              <Link to={user ? `/posts/post/${post._id}` : "/login"}>
-                <HomePosts key={post._id} post={post} />
-              </Link>
+              <Link key={post._id} to={user ? `/posts/post/${post._id}` : "/login"} className="block bg-[#D3EBE0] hover:bg-[#95B1AE] rounded-lg shadow-md mb-4 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl"><HomePosts post={post} /></Link>
             </>
           )) : <h3 className="text-center font-bold mt-16">No posts available</h3>}
       </div>

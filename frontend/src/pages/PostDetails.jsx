@@ -10,9 +10,7 @@ import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../context/UserContext"
 import Loader from "../components/Loader"
 
-
 const PostDetails = () => {
-
   const postId = useParams().id
   const [post, setPost] = useState({})
   const { user } = useContext(UserContext)
@@ -20,7 +18,6 @@ const PostDetails = () => {
   const [comment, setComment] = useState("")
   const [loader, setLoader] = useState(false)
   const navigate = useNavigate()
-
 
   const fetchPost = async () => {
     try {
@@ -39,17 +36,14 @@ const PostDetails = () => {
       const res = await axios.delete(URL + "/api/posts/" + postId, { withCredentials: true })
       console.log(res.data)
       navigate("/")
-
     }
     catch (err) {
       console.log(err)
     }
-
   }
 
   useEffect(() => {
     fetchPost()
-
   }, [postId])
 
   const fetchPostComments = async () => {
@@ -58,7 +52,6 @@ const PostDetails = () => {
       const res = await axios.get(URL + "/api/comments/post/" + postId)
       setComments(res.data)
       setLoader(false)
-
     }
     catch (err) {
       setLoader(true)
@@ -68,7 +61,6 @@ const PostDetails = () => {
 
   useEffect(() => {
     fetchPostComments()
-
   }, [postId])
 
   const postComment = async (e) => {
@@ -89,7 +81,7 @@ const PostDetails = () => {
   return (
     <div>
       <Navbar />
-      {loader ? <div className="h-[80vh] bg-[#edece3] flex justify-center items-center w-full"><Loader /></div> : <div className="px-8 md:px-[200px] mt-8">
+      {loader ? <div className="h-[80vh] flex justify-center items-center w-full"><Loader /></div> : <div className="px-8 md:px-[200px] mt-8">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-black md:text-3xl">{post.title}</h1>
           {user?._id === post?.userId && <div className="flex items-center justify-center space-x-2">
@@ -113,20 +105,13 @@ const PostDetails = () => {
           <p>Categories:</p>
           <div className="flex justify-center items-center space-x-2">
             {post.categories?.map((c, i) => (
-              <>
-                <div key={i} className="bg-gray-300 rounded-lg px-3 py-1">{c}</div>
-              </>
-
+              <><div key={i} className="bg-gray-300 rounded-lg px-3 py-1">{c}</div></>
             ))}
-
           </div>
         </div>
         <div className="flex flex-col mt-4">
           <h3 className="mt-6 mb-4 font-semibold">Comments:</h3>
-          {comments?.map((c) => (
-            <Comment key={c._id} c={c} post={post} />
-          ))}
-
+          {comments?.map((c) => (<Comment key={c._id} c={c} post={post} />))}
         </div>
         {/* write a comment */}
         <div className="w-full flex flex-col mt-4 md:flex-row">
@@ -139,4 +124,4 @@ const PostDetails = () => {
   )
 }
 
-export default PostDetails
+export default PostDetails;

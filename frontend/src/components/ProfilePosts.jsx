@@ -2,10 +2,10 @@ import { IF } from '../url'
 
 const ProfilePosts = ({ p }) => {
   return (
-    <div className="w-full bg-[#edece3] flex mt-8 space-x-4">
+    <div className="w-full bg-[#D3EBE0] hover:bg-[#95B1AE] rounded-lg shadow-md mb-4 flex mt-8 space-x-4 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl">
       {/* left */}
       <div className="w-[35%] h-[200px] flex justify-center items-center">
-        <img src={IF + p.photo} alt="" className="h-full w-full object-cover" />
+        <img className="h-full w-full object-cover" src={IF + p.photo} alt="" />
       </div>
       {/* right */}
       <div className="flex flex-col w-[65%]">

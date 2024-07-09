@@ -78,16 +78,16 @@ const Profile = () => {
           <h1 className="text-xl font-bold mb-4">Your posts:</h1>
           {posts?.map((p) => (<ProfilePosts key={p._id} p={p} />))}
         </div>
-        <div className="md:sticky md:top-12  flex justify-start md:justify-end items-start md:w-[30%] w-full md:items-end ">
+        <div className="md:sticky md:top-12 flex justify-start md:justify-end items-start md:w-[30%] w-full md:items-end ">
           <div className=" flex flex-col space-y-4 items-start">
             <h1 className="text-xl font-bold mb-4">Profile</h1>
-            <input onChange={(e) => setUsername(e.target.value)} value={username} className="outline-none px-4 py-2 text-gray-500" placeholder="Your username" type="text" />
-            <input onChange={(e) => setEmail(e.target.value)} value={email} className="outline-none px-4 py-2 text-gray-500" placeholder="Your email" type="email" />
+            <input onChange={(e) => setUsername(e.target.value)} value={username} className="outline-none rounded-md px-4 py-2 bg-[#95B1AE] text-black" placeholder="Your username" type="text" />
+            <input onChange={(e) => setEmail(e.target.value)} value={email} className="outline-none rounded-md px-4 py-2 bg-[#95B1AE] text-black" placeholder="Your email" type="email" />
             <div className="flex items-center space-x-4 mt-8">
-              <button onClick={handleUserUpdate} className="text-white font-semibold bg-black px-4 py-2 hover:text-black hover:bg-gray-400">Update</button>
-              <button onClick={handleUserDelete} className="text-white font-semibold bg-black px-4 py-2 hover:text-black hover:bg-gray-400">Delete</button>
+              <button onClick={handleUserUpdate} className="text-white rounded-md font-semibold  px-4 py-2 bg-[#344C64] hover:bg-[#240750] ">Update</button>
+              <button onClick={handleUserDelete} className="text-white rounded-md font-semibold bg-[#344C64] hover:bg-[#240750] px-4 py-2">Delete</button>
             </div>
-            {updated && <h3 className="text-green-500 text-sm text-center mt-4">user updated successfully!</h3>}
+            {updated && <h3 className="text-[#240750] text-lg text-center font-semibold mt-4">user updated successfully !!!</h3>}
           </div>
         </div>
       </div>
