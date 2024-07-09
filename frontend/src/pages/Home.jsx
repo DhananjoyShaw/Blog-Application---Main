@@ -51,7 +51,7 @@ const Home = () => {
 
     <>
       <Navbar />
-      <div className="px-8 md:px-[200px] min-h-[80vh]">
+      <div className="px-8 bg-[#edece3] md:px-[200px] min-h-[80vh]">
         {loader ? <div className="h-[40vh] flex justify-center items-center"><Loader /></div> : !noResults ?
           posts.map((post) => (
             <>

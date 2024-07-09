@@ -3,7 +3,7 @@ import { IF } from '../url'
 
 const HomePosts = ({ post }) => {
   return (
-    <div className="w-full flex mt-8 space-x-4">
+    <div className="w-full bg-[#edece3] flex mt-8 space-x-4">
       {/* left */}
       <div className="w-[35%] h-[200px] flex justify-center items-center">
         <img src={IF + post.photo} alt="" className="h-full w-full object-cover" />
@@ -22,10 +22,9 @@ const HomePosts = ({ post }) => {
         </div>
         <div className="text-sm md:text-lg" dangerouslySetInnerHTML={{ __html: post.desc.slice(0, 200) + " ...Read more" }}></div>
       </div>
-
     </div>
   )
 }
 
-export default HomePosts
+export default HomePosts;
 

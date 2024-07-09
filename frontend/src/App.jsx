@@ -22,9 +22,8 @@ const App = () => {
         <Route exact path="/myblogs/:id" element={<MyBlogs />} />
         <Route exact path="/profile/:id" element={<Profile />} />
       </Routes>
-
     </UserContextProvider>
   )
 }
 
-export default App
+export default App;

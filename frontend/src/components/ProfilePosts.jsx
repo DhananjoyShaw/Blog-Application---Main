@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 import { IF } from '../url'
 
 const ProfilePosts = ({ p }) => {
   return (
-    <div className="w-full flex mt-8 space-x-4">
+    <div className="w-full bg-[#edece3] flex mt-8 space-x-4">
       {/* left */}
       <div className="w-[35%] h-[200px] flex justify-center items-center">
         <img src={IF + p.photo} alt="" className="h-full w-full object-cover" />
@@ -21,7 +20,7 @@ const ProfilePosts = ({ p }) => {
           </div>
         </div>
         {/* Use dangerouslySetInnerHTML to render HTML content */}
-        <div dangerouslySetInnerHTML={{ __html: p.desc }} className="text-sm md:text-lg" />
+        <div className="text-sm md:text-lg" dangerouslySetInnerHTML={{ __html: p.desc.slice(0, 200) + " ...Read more" }} />
       </div>
     </div>
   )

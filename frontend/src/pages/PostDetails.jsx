@@ -89,7 +89,7 @@ const PostDetails = () => {
   return (
     <div>
       <Navbar />
-      {loader ? <div className="h-[80vh] flex justify-center items-center w-full"><Loader /></div> : <div className="px-8 md:px-[200px] mt-8">
+      {loader ? <div className="h-[80vh] bg-[#edece3] flex justify-center items-center w-full"><Loader /></div> : <div className="px-8 md:px-[200px] mt-8">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-black md:text-3xl">{post.title}</h1>
           {user?._id === post?.userId && <div className="flex items-center justify-center space-x-2">
