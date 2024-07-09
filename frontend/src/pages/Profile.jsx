@@ -73,7 +73,7 @@ const Profile = () => {
   return (
     <div>
       <Navbar />
-      <div className="bg-[#edece3] min-h-[80vh] px-8 md:px-[200px] mt-8 flex md:flex-row flex-col-reverse md:items-start items-start">
+      <div className="bg-[#edece3] min-h-[80vh] px-8 md:px-[100px] mt-8 flex md:flex-row flex-col-reverse md:items-start items-start">
         <div className="flex flex-col md:w-[70%] w-full mt-8 md:mt-0">
           <h1 className="text-xl font-bold mb-4">Your posts:</h1>
           {posts?.map((p) => (<ProfilePosts key={p._id} p={p} />))}
