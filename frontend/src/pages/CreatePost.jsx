@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ImCross } from 'react-icons/im';
 import { UserContext } from '../context/UserContext';
 import { URL } from '../url';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 
 // Import Quill styles
@@ -74,7 +74,7 @@ const CreatePost = () => {
       post.photo = filename;
 
       try {
-        const imgUpload = await axios.post(URL + '/api/upload', data);
+        await axios.post(URL + '/api/upload', data);
       } catch (err) {
         console.log(err);
       }

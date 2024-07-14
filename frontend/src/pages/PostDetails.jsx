@@ -22,7 +22,6 @@ const PostDetails = () => {
   const fetchPost = async () => {
     try {
       const res = await axios.get(URL + "/api/posts/" + postId)
-      // console.log(res.data)
       setPost(res.data)
     }
     catch (err) {
@@ -66,7 +65,7 @@ const PostDetails = () => {
   const postComment = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post(URL + "/api/comments/create",
+      await axios.post(URL + "/api/comments/create",
         { comment: comment, author: user.username, postId: postId, userId: user._id },
         { withCredentials: true })
 

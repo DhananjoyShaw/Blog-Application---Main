@@ -1,19 +1,19 @@
-import axios from "axios"
-import { BiEdit } from "react-icons/bi"
-import { MdDelete } from "react-icons/md"
-import { URL } from "../url"
-import { useContext } from "react"
-import { UserContext } from "../context/UserContext"
+import axios from "axios";
+import { MdDelete } from "react-icons/md";
+import { URL } from "../url";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+import PropTypes from 'prop-types';
 
-const Comment = ({ c, post }) => {
-  const { user } = useContext(UserContext)
+const Comment = ({ c }) => {
+  const { user } = useContext(UserContext);
   const deleteComment = async (id) => {
     try {
-      await axios.delete(URL + "/api/comments/" + id, { withCredentials: true })
-      window.location.reload(true)
+      await axios.delete(URL + "/api/comments/" + id, { withCredentials: true });
+      window.location.reload(true);
     }
     catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 
@@ -34,5 +34,16 @@ const Comment = ({ c, post }) => {
     </div>
   )
 }
+
+Comment.propTypes = {
+  c: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired,
+  }).isRequired,
+  post: PropTypes.object,
+};
 
 export default Comment;

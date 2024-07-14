@@ -1,4 +1,6 @@
-import { IF } from '../url'
+// import React from 'react';
+import PropTypes from 'prop-types';
+import { IF } from '../url';
 
 const ProfilePosts = ({ p }) => {
   return (
@@ -23,7 +25,17 @@ const ProfilePosts = ({ p }) => {
         <div className="text-sm md:text-lg" dangerouslySetInnerHTML={{ __html: p.desc.slice(0, 200) + " ...Read more" }} />
       </div>
     </div>
-  )
-}
+  );
+};
+
+ProfilePosts.propTypes = {
+  p: PropTypes.shape({
+    photo: PropTypes.string,
+    title: PropTypes.string,
+    username: PropTypes.string,
+    updatedAt: PropTypes.string,
+    desc: PropTypes.string,
+  }).isRequired,
+};
 
 export default ProfilePosts;

@@ -1,4 +1,5 @@
-import { IF } from '../url'
+import PropTypes from 'prop-types';
+import { IF } from '../url';
 
 const HomePosts = ({ post }) => {
   return (
@@ -22,7 +23,17 @@ const HomePosts = ({ post }) => {
       {/* Content */}
       <div className="text-sm md:text-lg" dangerouslySetInnerHTML={{ __html: post.desc.slice(0, 200) + " ...Read more" }}></div>
     </div>
-  )
-}
+  );
+};
+
+HomePosts.propTypes = {
+  post: PropTypes.shape({
+    photo: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default HomePosts;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ImCross } from 'react-icons/im';
@@ -74,7 +74,7 @@ const EditPost = () => {
       post.photo = filename;
 
       try {
-        const imgUpload = await axios.post(URL + '/api/upload', data);
+        await axios.post(URL + '/api/upload', data);
       } catch (err) {
         console.log(err);
       }
