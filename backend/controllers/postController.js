@@ -44,8 +44,6 @@ export const getPosts = async (req, res) => {
 
     try {
         const searchFilter = search ? { title: { $regex: search, $options: "i" } } : {};
-        console.log(`Fetching posts with search filter: ${JSON.stringify(searchFilter)}`);
-
         const posts = await Post.find(searchFilter);
         res.status(200).json(posts);
     } catch (err) {

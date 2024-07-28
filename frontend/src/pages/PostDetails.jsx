@@ -6,9 +6,10 @@ import { BiEdit } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
 import axios from "axios";
 import { URL, IF } from "../url";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { UserContext } from "../context/UserContext";
 import Loader from "../components/Loader";
+import PropTypes from 'prop-types';
 
 const PostDetails = ({ postId: propPostId }) => {
   const { id } = useParams();
@@ -20,14 +21,14 @@ const PostDetails = ({ postId: propPostId }) => {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
 
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
     try {
       const res = await axios.get(`${URL}/api/posts/${postId}`);
       setPost(res.data);
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [postId]);
 
   const handleDeletePost = async () => {
     try {
@@ -41,9 +42,9 @@ const PostDetails = ({ postId: propPostId }) => {
 
   useEffect(() => {
     fetchPost();
-  }, [postId]);
+  }, [fetchPost]);
 
-  const fetchPostComments = async () => {
+  const fetchPostComments = useCallback(async () => {
     setLoader(true);
     try {
       const res = await axios.get(`${URL}/api/comments/post/${postId}`);
@@ -53,11 +54,11 @@ const PostDetails = ({ postId: propPostId }) => {
       setLoader(true);
       console.log(err);
     }
-  };
+  }, [postId]);
 
   useEffect(() => {
     fetchPostComments();
-  }, [postId]);
+  }, [fetchPostComments]);
 
   const postComment = async (e) => {
     e.preventDefault();
@@ -66,7 +67,6 @@ const PostDetails = ({ postId: propPostId }) => {
         { comment: comment, author: user.username, postId: postId, userId: user._id },
         { withCredentials: true });
 
-      // fetchPostComments()
       window.location.reload(true);
     } catch (err) {
       console.log(err);
@@ -139,6 +139,10 @@ const PostDetails = ({ postId: propPostId }) => {
       <Footer />
     </div>
   );
+};
+
+PostDetails.propTypes = {
+  postId: PropTypes.string,
 };
 
 export default PostDetails;

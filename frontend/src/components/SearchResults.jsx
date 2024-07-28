@@ -39,7 +39,9 @@ const SearchResults = () => {
                             ))}
                         </div>
                     ) : (
-                        <p>No posts found for "{query}"</p>
+                        <div>{/* eslint-disable-next-line react/no-unescaped-entities */}
+                            <p>No posts found for "{query}"</p>
+                        </div>
                     )}
                 </div>
             )}
