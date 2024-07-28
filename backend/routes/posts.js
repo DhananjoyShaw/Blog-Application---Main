@@ -49,16 +49,17 @@ router.get("/:id", async (req, res) => {
 
 // GET POSTS
 router.get("/", async (req, res) => {
-    const query = req.query;
+    const search = req.query.search || req.query.query;
 
     try {
-        const searchFilter = {
-            title: { $regex: query.search, $options: "i" }
-        };
-        const posts = await Post.find(query.search ? searchFilter : {});
+        const searchFilter = search ? { title: { $regex: search, $options: "i" } } : {};
+        console.log(`Fetching posts with search filter: ${JSON.stringify(searchFilter)}`);
+
+        const posts = await Post.find(searchFilter);
         res.status(200).json(posts);
     } catch (err) {
-        res.status(500).json(err);
+        console.error("Error fetching posts:", err);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 });
 

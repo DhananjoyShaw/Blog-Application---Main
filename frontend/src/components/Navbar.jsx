@@ -17,13 +17,18 @@ const Navbar = () => {
 
   const { user } = useContext(UserContext);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search?query=${prompt}`);
+  };
+
   return (
     <div className="flex flex-col md:flex-row bg-[#57A6A1] items-center justify-between px-6 md:px-[100px] py-4 space-y-4 md:space-y-0">
       <h1 className="text-2xl font-mono md:text-3xl font-extrabold">
         <Link to="/">BLOGIFY</Link>
       </h1>
       {path === "/" && (
-        <div className="flex justify-center items-center relative w-full md:w-auto">
+        <form onSubmit={handleSearch} className="flex justify-center items-center relative w-full md:w-auto">
           <BsSearch className="absolute left-3 text-black" />
           <input
             onChange={(e) => setPrompt(e.target.value)}
@@ -31,7 +36,7 @@ const Navbar = () => {
             placeholder="Search a post"
             type="text"
           />
-        </div>
+        </form>
       )}
       <div className="hidden md:flex items-center justify-center space-x-2 md:space-x-4">
         {user ? (
