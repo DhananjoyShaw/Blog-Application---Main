@@ -8,14 +8,13 @@ import userRoute from './routes/users.js';
 import postRoute from './routes/posts.js';
 import commentRoute from './routes/comments.js';
 import upload from './middlewares/upload.js';
-
 dotenv.config();
 
 const app = express();
 
 // middlewares
 app.use(cors({
-    origin: 'https://blog-application-client-six.vercel.app', // Update with your client URL
+    origin: 'https://blog-application-client-six.vercel.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
