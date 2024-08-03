@@ -14,9 +14,9 @@ dotenv.config();
 const app = express();
 
 // middlewares
-app.use(express.json());
-app.use('/images', express.static(path.join(path.resolve(), 'images')));
-app.use(cors({ origin: 'https://blog-application-client-six.vercel.app', credentials: true }));
+app.use(cors({ origin: 'https://blog-application-client-six.vercel.app', credentials: true })); 
+app.use(express.json()); 
+app.use('/images', express.static(path.join(path.resolve(), 'images'))); 
 app.use(cookieParser());
 
 // routes
