@@ -8,6 +8,7 @@ import userRoute from './routes/users.js';
 import postRoute from './routes/posts.js';
 import commentRoute from './routes/comments.js';
 import upload from './middlewares/upload.js';
+
 dotenv.config();
 
 const app = express();
