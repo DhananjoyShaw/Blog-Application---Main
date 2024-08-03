@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ImCross } from 'react-icons/im';
@@ -44,7 +44,7 @@ const EditPost = () => {
     'link', 'image', 'video'
   ];
 
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
     try {
       const res = await axios.get(`${URL}/api/posts/${postId}`);
       setTitle(res.data.title);
@@ -54,7 +54,11 @@ const EditPost = () => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [postId]);
+
+  useEffect(() => {
+    fetchPost();
+  }, [fetchPost]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -87,10 +91,6 @@ const EditPost = () => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    fetchPost();
-  }, [postId]);
 
   const deleteCategory = (i) => {
     let updatedCats = [...cats];

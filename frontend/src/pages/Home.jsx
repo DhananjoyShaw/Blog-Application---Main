@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import HomePosts from "../components/HomePosts";
 import Navbar from "../components/Navbar";
 import { URL } from "../url";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Loader from "../components/Loader";
 import { UserContext } from "../context/UserContext";
@@ -15,7 +15,7 @@ const Home = () => {
   const [loader, setLoader] = useState(false);
   const { user } = useContext(UserContext);
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     setLoader(true);
     try {
       const res = await axios.get(`${URL}/api/posts/${search}`);
@@ -30,11 +30,11 @@ const Home = () => {
       console.log(err);
       setLoader(true);
     }
-  };
+  }, [search]);
 
   useEffect(() => {
     fetchPosts();
-  }, [search]);
+  }, [fetchPosts]);
 
   return (
     <>

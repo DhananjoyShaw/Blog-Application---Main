@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import ProfilePosts from "../components/ProfilePosts";
@@ -17,7 +17,7 @@ const Profile = () => {
   const [posts, setPosts] = useState([]);
   const [updated, setUpdated] = useState(false);
 
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
     try {
       const res = await axios.get(`${URL}/api/users/${id}`);
       setUsername(res.data.username);
@@ -26,7 +26,23 @@ const Profile = () => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [id]);
+
+  const fetchUserPosts = useCallback(async () => {
+    try {
+      const res = await axios.get(`${URL}/api/posts/user/${user._id}`);
+      setPosts(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [user._id]);
+
+  useEffect(() => {
+    if (id) {
+      fetchProfile();
+      fetchUserPosts();
+    }
+  }, [id, fetchProfile, fetchUserPosts]);
 
   const handleUserUpdate = async () => {
     setUpdated(false);
@@ -48,22 +64,6 @@ const Profile = () => {
       console.log(err);
     }
   };
-
-  const fetchUserPosts = async () => {
-    try {
-      const res = await axios.get(`${URL}/api/posts/user/${user._id}`);
-      setPosts(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    if (id) {
-      fetchProfile();
-      fetchUserPosts();
-    }
-  }, [id]);
 
   return (
     <div>
