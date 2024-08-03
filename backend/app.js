@@ -14,7 +14,7 @@ const app = express();
 
 // middlewares
 app.use(cors({
-    origin: 'https://blog-application-client-six.vercel.app',
+    origin: 'https://blog-application-client-eight.vercel.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
