@@ -46,7 +46,7 @@ const EditPost = () => {
 
   const fetchPost = async () => {
     try {
-      const res = await axios.get(URL + '/api/posts/' + postId);
+      const res = await axios.get(`${URL}/api/posts/${postId}`);
       setTitle(res.data.title);
       setDesc(res.data.desc);
       setFile(res.data.photo);
@@ -74,14 +74,14 @@ const EditPost = () => {
       post.photo = filename;
 
       try {
-        await axios.post(URL + '/api/upload', data);
+        await axios.post(`${URL}/api/upload`, data);
       } catch (err) {
         console.log(err);
       }
     }
 
     try {
-      const res = await axios.put(URL + '/api/posts/' + postId, post, { withCredentials: true });
+      const res = await axios.put(`${URL}/api/posts/${postId}`, post, { withCredentials: true });
       navigate('/posts/post/' + res.data._id);
     } catch (err) {
       console.log(err);

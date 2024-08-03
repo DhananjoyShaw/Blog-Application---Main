@@ -7,7 +7,7 @@ const ProfilePosts = ({ p }) => {
     <div className="w-full bg-[#D3EBE0] hover:bg-[#95B1AE] rounded-lg shadow-md mb-4 flex mt-8 space-x-4 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl">
       {/* left */}
       <div className="w-[35%] h-[200px] flex justify-center items-center">
-        <img className="h-full w-full object-scale-down" src={IF + p.photo} alt="" />
+        <img className="h-full w-full object-scale-down" src={`${IF}${p.photo}`} alt="" />
       </div>
       {/* right */}
       <div className="flex flex-col w-[65%]">

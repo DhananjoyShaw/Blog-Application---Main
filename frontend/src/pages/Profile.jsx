@@ -8,7 +8,7 @@ import { UserContext } from "../context/UserContext";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Profile = () => {
-  const param = useParams().id;
+  const { id } = useParams();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get(URL + "/api/users/" + user._id);
+      const res = await axios.get(`${URL}/api/users/${id}`);
       setUsername(res.data.username);
       setEmail(res.data.email);
       setPassword(res.data.password);
@@ -31,7 +31,7 @@ const Profile = () => {
   const handleUserUpdate = async () => {
     setUpdated(false);
     try {
-      await axios.put(URL + "/api/users/" + user._id, { username, email, password }, { withCredentials: true });
+      await axios.put(`${URL}/api/users/${user._id}`, { username, email, password }, { withCredentials: true });
       setUpdated(true);
     } catch (err) {
       console.log(err);
@@ -41,7 +41,7 @@ const Profile = () => {
 
   const handleUserDelete = async () => {
     try {
-      await axios.delete(URL + "/api/users/" + user._id, { withCredentials: true });
+      await axios.delete(`${URL}/api/users/${user._id}`, { withCredentials: true });
       setUser(null);
       navigate("/");
     } catch (err) {
@@ -51,7 +51,7 @@ const Profile = () => {
 
   const fetchUserPosts = async () => {
     try {
-      const res = await axios.get(URL + "/api/posts/user/" + user._id);
+      const res = await axios.get(`${URL}/api/posts/user/${user._id}`);
       setPosts(res.data);
     } catch (err) {
       console.log(err);
@@ -59,12 +59,11 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    fetchProfile();
-  }, [param]);
-
-  useEffect(() => {
-    fetchUserPosts();
-  }, [param]);
+    if (id) {
+      fetchProfile();
+      fetchUserPosts();
+    }
+  }, [id]);
 
   return (
     <div>
@@ -77,7 +76,7 @@ const Profile = () => {
           ))}
         </div>
         <div className="md:sticky md:top-12 flex justify-start md:justify-end items-start md:w-[30%] w-full md:items-end ">
-          <div className=" flex flex-col space-y-4 items-start">
+          <div className="flex flex-col space-y-4 items-start">
             <h1 className="text-xl font-semibold font-mono md:text-3xl mb-4">Profile</h1>
             <input
               onChange={(e) => setUsername(e.target.value)}
@@ -109,7 +108,7 @@ const Profile = () => {
             </div>
             {updated && (
               <h3 className="text-[#240750] text-lg text-center font-semibold mt-4">
-                user updated successfully !!!
+                User updated successfully !!!
               </h3>
             )}
           </div>
@@ -117,7 +116,7 @@ const Profile = () => {
       </div>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
 export default Profile;
