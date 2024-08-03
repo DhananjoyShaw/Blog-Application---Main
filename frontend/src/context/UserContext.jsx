@@ -10,22 +10,22 @@ export function UserContextProvider({ children }) {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [])
 
   const getUser = async () => {
     try {
       const res = await axios.get(`${URL}/api/auth/refetch`, { withCredentials: true });
       setUser(res.data);
     } catch (err) {
-      console.log(err);
+      console.error('Failed to fetch user:', err.response ? err.response.data : err.message);
     }
-  };
+  }
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
-  );
+  )
 }
 
 UserContextProvider.propTypes = {

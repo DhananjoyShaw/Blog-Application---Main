@@ -47,7 +47,7 @@ export const refetchUser = (req, res) => {
     const token = req.cookies.token;
     jwt.verify(token, process.env.SECRET, {}, (err, data) => {
         if (err) {
-            return res.status(404).json(err);
+            return res.status(401).json({ error: 'Unauthorized' }); 
         }
         res.status(200).json(data);
     });
