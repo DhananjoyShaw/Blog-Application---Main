@@ -29,7 +29,9 @@ export const login = async (req, res) => {
         }
         const token = jwt.sign({ _id: user._id, username: user.username, email: user.email }, process.env.SECRET, { expiresIn: "3d" });
         const { password, ...info } = user._doc;
-        res.cookie("token", token).status(200).json(info);
+        res.cookie("token", token, {
+            httpOnly: true, secure: true, sameSite: 'None'
+        }).status(200).json(info);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -47,7 +49,7 @@ export const refetchUser = (req, res) => {
     const token = req.cookies.token;
     jwt.verify(token, process.env.SECRET, {}, (err, data) => {
         if (err) {
-            return res.status(401).json({ error: 'Unauthorized' }); 
+            return res.status(401).json({ error: 'Unauthorized' });
         }
         res.status(200).json(data);
     });
