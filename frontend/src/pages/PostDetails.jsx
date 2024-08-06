@@ -63,10 +63,11 @@ const PostDetails = ({ postId: propPostId }) => {
   const postComment = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${URL}/api/comments/create`,
+      const res = await axios.post(`${URL}/api/comments/create`,
         { comment: comment, author: user.username, postId: postId, userId: user._id },
         { withCredentials: true });
-      window.location.reload(true);
+      setComments([...comments, res.data]);
+      setComment("");
     } catch (err) {
       console.log(err);
     }
@@ -118,10 +119,13 @@ const PostDetails = ({ postId: propPostId }) => {
             <h3 className="mt-6 mb-4 font-semibold">Comments:</h3>
             {comments?.map((c) => (<Comment key={c._id} c={c} post={post} />))}
           </div>
+
           {/* write a comment */}
           <div className="w-full flex flex-col mt-4 md:flex-row">
             <input
-              onChange={(e) => setComment(e.target.value)} type="text" placeholder="Write a comment ..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              type="text" placeholder="Write a comment ..."
               className="bg-[#95B1AE] placeholder-black md:w-[80%] outline-none py-2 px-4 mt-4 md:mt-0"
             />
             <button
