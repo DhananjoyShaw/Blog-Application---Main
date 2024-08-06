@@ -5,14 +5,14 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import PropTypes from 'prop-types';
 
-const Comment = ({ c }) => {
+const Comment = ({ c, onDelete }) => {
   const { user } = useContext(UserContext);
+
   const deleteComment = async (id) => {
     try {
       await axios.delete(`${URL}/api/comments/${id}`, { withCredentials: true });
-      window.location.reload(true);
-    }
-    catch (err) {
+      if (onDelete) onDelete(id);
+    } catch (err) {
       console.log(err);
     }
   }
@@ -24,10 +24,11 @@ const Comment = ({ c }) => {
         <div className="flex justify-center items-center space-x-4">
           <p>{new Date(c.updatedAt).toString().slice(0, 15)}</p>
           <p>{new Date(c.updatedAt).toString().slice(16, 24)}</p>
-          {user?._id === c?.userId ?
+          {user?._id === c?.userId &&
             <div className="flex items-center justify-center space-x-2">
               <p className="cursor-pointer" onClick={() => deleteComment(c._id)}><MdDelete /></p>
-            </div> : ""}
+            </div>
+          }
         </div>
       </div>
       <p className="px-4 mt-2">{c.comment}</p>
@@ -43,7 +44,7 @@ Comment.propTypes = {
     userId: PropTypes.string.isRequired,
     comment: PropTypes.string.isRequired,
   }).isRequired,
-  post: PropTypes.object,
-};
+  onDelete: PropTypes.func,
+}
 
 export default Comment;

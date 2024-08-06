@@ -32,8 +32,7 @@ const PostDetails = ({ postId: propPostId }) => {
 
   const handleDeletePost = async () => {
     try {
-      const res = await axios.delete(`${URL}/api/posts/${postId}`, { withCredentials: true });
-      console.log(res.data);
+      await axios.delete(`${URL}/api/posts/${postId}`, { withCredentials: true });
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -51,7 +50,7 @@ const PostDetails = ({ postId: propPostId }) => {
       setComments(res.data);
       setLoader(false);
     } catch (err) {
-      setLoader(true);
+      setLoader(false);
       console.log(err);
     }
   }, [postId]);
@@ -71,6 +70,10 @@ const PostDetails = ({ postId: propPostId }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleCommentDelete = (id) => {
+    setComments(comments.filter(comment => comment._id !== id));
   };
 
   return (
@@ -117,10 +120,10 @@ const PostDetails = ({ postId: propPostId }) => {
           </div>
           <div className="flex flex-col mt-4">
             <h3 className="mt-6 mb-4 font-semibold">Comments:</h3>
-            {comments?.map((c) => (<Comment key={c._id} c={c} post={post} />))}
+            {comments?.map((c) => (
+              <Comment key={c._id} c={c} onDelete={handleCommentDelete} />
+            ))}
           </div>
-
-          {/* write a comment */}
           <div className="w-full flex flex-col mt-4 md:flex-row">
             <input
               value={comment}
@@ -142,6 +145,6 @@ const PostDetails = ({ postId: propPostId }) => {
 
 PostDetails.propTypes = {
   postId: PropTypes.string,
-};
+}
 
 export default PostDetails;
