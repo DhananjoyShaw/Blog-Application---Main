@@ -74,7 +74,7 @@ const CreatePost = () => {
       post.photo = filename;
 
       try {
-        await axios.post(URL + '/api/upload', data);
+        await axios.post(`${URL}/api/upload`, data);
       } catch (err) {
         console.log(err);
       }
@@ -134,7 +134,7 @@ const CreatePost = () => {
       </div>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
 export default CreatePost;

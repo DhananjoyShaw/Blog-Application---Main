@@ -66,7 +66,6 @@ const PostDetails = ({ postId: propPostId }) => {
       await axios.post(`${URL}/api/comments/create`,
         { comment: comment, author: user.username, postId: postId, userId: user._id },
         { withCredentials: true });
-
       window.location.reload(true);
     } catch (err) {
       console.log(err);
@@ -122,24 +121,20 @@ const PostDetails = ({ postId: propPostId }) => {
           {/* write a comment */}
           <div className="w-full flex flex-col mt-4 md:flex-row">
             <input
-              onChange={(e) => setComment(e.target.value)}
-              type="text"
-              placeholder="Write a comment ..."
+              onChange={(e) => setComment(e.target.value)} type="text" placeholder="Write a comment ..."
               className="bg-[#95B1AE] placeholder-black md:w-[80%] outline-none py-2 px-4 mt-4 md:mt-0"
             />
             <button
               onClick={postComment}
               className="bg-[#344C64] hover:bg-[#240750] text-sm text-white rounded-sm px-2 py-2 md:w-[20%] mt-4 md:mt-0"
-            >
-              Add Comment
-            </button>
+            >Add Comment</button>
           </div>
         </div>
       )}
       <Footer />
     </div>
-  );
-};
+  )
+}
 
 PostDetails.propTypes = {
   postId: PropTypes.string,
